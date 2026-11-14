@@ -1,53 +1,39 @@
 # Plano — Moon Patrol em Assembly 8086
 
-Marque `[x]` quando terminar cada passo. Cada um gera algo visível: rode e confira antes de seguir.
+Marque `[x]` quando terminar cada etapa. Daqui em diante, cada etapa já usa os elementos **reais** do enunciado (sprites, tamanhos e posições de verdade), sem objetos de teste.
 
-## Fase 0 — Fundamentos
-- [x] 1. Esqueleto do programa: abrir, rodar e voltar ao DOS
-- [x] 2. Fazer a tela 320x200 aparecer (modo 13h) e voltar ao modo texto
-- [x] 3. Pintar UM pixel numa posição (x, y)
-- [x] 4. Pintar uma linha e um retângulo (`rep stosb`)
-- [x] 5. Criar as constantes (`equ`) do jogo
+## ✅ Base (feito)
+- [x] Esqueleto, modo 13h, pixel, linha, retângulo, constantes
+- [x] Bitmap na memória + rotinas DESENHAR_SPRITE / DESENHAR_RETANGULO
+- [x] ESPERAR (INT 1Ah) e MOVER_DIREITA (um passo)
+- [x] ESCREVER_TEXTO / ESCREVER_LINHAS (INT 10h, 13h)
+- [x] Título ASCII + menu com caixas, setas, Enter e teclado sem travar
 
-## Fase 1 — Sprites (o coração do jogo)
-- [ ] 6. Guardar um bitmap na memória (`db`)
-- [ ] 7. Rotina genérica: DESENHA_SPRITE (x, y, bitmap, largura, altura)
-- [ ] 8. Rotina genérica: APAGA_SPRITE (pinta a área com a cor de fundo)
-- [ ] 9. Esperar um tempo com INT 1Ah (ticks)
-- [ ] 10. Mover um sprite pela tela (apaga → muda x → desenha → espera)
+## 1. Tela inicial completa
+- [ ] Bitmaps reais: jipe (20×10) e as 3 naves (14×14)
+- [ ] Jipe + 3 naves andando entre o título e o menu, voltando pela esquerda
 
-## Fase 2 — Tela inicial
-- [ ] 11. Escrever texto colorido (INT 10h, função 13h)
-- [ ] 12. Título "Moon Patrol" em arte ASCII (verde-claro)
-- [ ] 13. Ler teclado sem travar (INT 16h, funções 01h e 00h)
-- [ ] 14. Menu "Jogar" / "Sair" com caixas, setas e Enter
-- [ ] 15. Animação do jipe e das 3 naves andando na tela inicial
+## 2. Jogo: cenário e jipe
+- [ ] Tela do jogo: chão amarelo (7 px) e montanhas a partir da linha 100
+- [ ] Loop do jogo (o mesmo formato do menu) + jipe andando ←/→ até a metade da tela
+- [ ] Pulo trapezoidal (sobe 3 px/frame até 15 px, fica no topo, desce)
+- [ ] Barra de status: score, corações (vidas) e relógio com o tempo
 
-## Fase 3 — Base do jogo
-- [ ] 16. Loop principal: ler tecla → atualizar → desenhar → esperar
-- [ ] 17. Faixa amarela do chão + jipe andando (limitado à metade da tela)
-- [ ] 18. Pulo trapezoidal (sobe 3 px/frame, fica no topo, desce)
-- [ ] 19. Barra de status: score, corações e relógio com o tempo
+## 3. Jogo: obstáculos
+- [ ] Rolagem contínua das montanhas (sem emenda)
+- [ ] Gerador de números aleatórios
+- [ ] Crateras (3 tipos, 14×7): surgem à direita, 150 px de distância, colisão, +50
+- [ ] Rochas (4 tipos, 12×10) entre crateras, colisão, +50
+- [ ] Perder vida: jipe volta para a coluna 0
 
-## Fase 4 — Cenário
-- [ ] 20. Montanhas desenhadas a partir da linha 100
-- [ ] 21. Rolagem contínua do cenário (sem emenda visível)
-- [ ] 22. Gerador de números aleatórios
-- [ ] 23. Crateras: surgir, andar com o chão, distância mínima de 150 px
-- [ ] 24. Colisão jipe × cratera, perder vida, voltar na coluna 0, +50 pontos
-- [ ] 25. Rochas (4 tipos) entre crateras, colisão e pontos
+## 4. Jogo: naves
+- [ ] Grupos de 1 a 3 naves do mesmo tipo (aleatório), 30 px entre elas, andando ←
+- [ ] *(opcional)* Tiros do jipe: superior (naves, +100) e frontal (rochas)
+- [ ] *(opcional)* Tiros das naves × jipe
 
-## Fase 5 — Naves e tiros
-- [ ] 26. Tabela de objetos (várias naves usando a mesma rotina)
-- [ ] 27. Grupos de 1 a 3 naves aleatórias, regra dos 30 px
-- [ ] 28. Tiro superior do jipe (amarelo) × naves, +100 pontos
-- [ ] 29. Tiro frontal do jipe (vermelho, 50 px) × rochas
-- [ ] 30. Tiros das naves (brancos) × jipe
+## 5. Fim e entrega
+- [ ] Game Over por vidas ou tempo: tela GAME OVER + score → volta ao menu
+- [ ] Revisar cabeçalhos e constantes
+- [ ] Testar no GUI Turbo Assembler (Windows)
 
-## Fase 6 — Fim e entrega
-- [ ] 31. Fim de jogo por vidas ou por tempo
-- [ ] 32. Tela GAME OVER + score final + voltar ao menu
-- [ ] 33. Cabeçalhos em todas as rotinas (Função / Entrada / Saída)
-- [ ] 34. Testar no GUI Turbo Assembler (Windows)
-
-> Mínimo entregável: tudo, exceto os passos 28–30, que são opcionais (ganham pontos extras).
+> Mínimo entregável: tudo, exceto os itens marcados como *opcional* (que valem pontos extras).
