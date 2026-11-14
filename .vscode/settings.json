@@ -3,5 +3,19 @@
     "masmtasm.ASM.emulator": "dosbox-x",
     "masmtasm.dosbox.run": "pause",
     "masmtasm.dosboxX.lang": "en",
-    "files.encoding": "cp437"
+    "files.encoding": "cp437",
+
+    // Desliga o autocomplete da extensao (mantem cores e build/run)
+    "masmtasm.language.programmaticFeatures": false,
+
+    "[assembly]": {
+        "editor.quickSuggestions": { "other": "off", "comments": "off", "strings": "off" },
+        "editor.suggestOnTriggerCharacters": false,
+        "editor.wordBasedSuggestions": "off",
+        "editor.acceptSuggestionOnEnter": "off",
+        "editor.snippetSuggestions": "none",
+        "editor.inlineSuggest.enabled": false,
+        "editor.formatOnType": false,
+        "editor.formatOnSave": false
+    }
 }
